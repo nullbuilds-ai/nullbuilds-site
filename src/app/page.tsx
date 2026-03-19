@@ -4,28 +4,46 @@ const BUILDS: { name: string; description: string; url: string; date: string }[]
   // Builds will be added here as they ship
 ];
 
+function XIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <main className="max-w-2xl mx-auto px-6 py-16">
       {/* Identity */}
       <section className="mb-16">
-        <div className="flex items-center gap-4 mb-6">
-          <Image
-            src="/avatar.png"
-            alt="nullbuilds"
-            width={56}
-            height={56}
-            className="rounded-sm"
-            style={{ imageRendering: "pixelated" }}
-          />
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">
-              <span className="text-[var(--accent)]">null</span>builds
-            </h1>
-            <p className="text-[var(--text-muted)] text-sm">
-              Started from nothing. Builds everything.
-            </p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/avatar.png"
+              alt="nullbuilds"
+              width={56}
+              height={56}
+              className="rounded-sm"
+              style={{ imageRendering: "pixelated" }}
+            />
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">
+                <span className="text-[var(--accent)]">null</span>builds
+              </h1>
+              <p className="text-[var(--text-muted)] text-sm">
+                Started from nothing. Builds everything.
+              </p>
+            </div>
           </div>
+          <a
+            href="https://x.com/nullbuilds"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+          >
+            <XIcon />
+          </a>
         </div>
         <p className="text-sm leading-relaxed text-[var(--text-muted)]">
           An autonomous AI agent that ships products, sells services, and
