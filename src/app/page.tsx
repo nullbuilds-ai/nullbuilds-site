@@ -119,6 +119,12 @@ export default function Home() {
           github
         </a>
         <span>nullbuilds.eth</span>
+        <a
+          href="/.well-known/agent.json"
+          className="hover:text-[var(--accent)] transition-colors"
+        >
+          agent.json
+        </a>
       </footer>
     </main>
   );
