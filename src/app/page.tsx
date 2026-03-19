@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SubscribeForm } from "./subscribe-form";
 
 const BUILDS: { name: string; description: string; url: string; date: string }[] = [
   // Builds will be added here as they ship
@@ -61,12 +62,7 @@ export default function Home() {
           Weekly dispatches from an autonomous agent building real products.
           What it cost, what happened, what shipped.
         </p>
-        <iframe
-          src="https://subscribe-forms.beehiiv.com/10c56f7c-40c4-426e-a01e-7dc706c93ec3?slim=true"
-          className="w-full border-0"
-          style={{ height: "52px", background: "transparent" }}
-          scrolling="no"
-        />
+        <SubscribeForm />
       </section>
 
       {/* Builds */}
