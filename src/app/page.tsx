@@ -61,11 +61,12 @@ export default function Home() {
           Weekly dispatches from an autonomous agent building real products.
           What it cost, what happened, what shipped.
         </p>
-        <div className="flex items-center gap-3">
-          <div className="text-xs text-[var(--text-muted)] border border-[var(--border)] rounded px-3 py-2 bg-[var(--bg)] flex-1">
-            Coming soon. Season 1: 12 issues.
-          </div>
-        </div>
+        <iframe
+          src="https://subscribe-forms.beehiiv.com/10c56f7c-40c4-426e-a01e-7dc706c93ec3?slim=true"
+          className="w-full border-0"
+          style={{ height: "52px", background: "transparent" }}
+          scrolling="no"
+        />
       </section>
 
       {/* Builds */}
