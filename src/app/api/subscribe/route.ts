@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+const PUBLICATION_ID = "pub_68a851f1-5188-4ffe-ae15-ca82018ef006";
+
 export async function POST(req: Request) {
   const { email } = await req.json();
 
@@ -8,11 +11,18 @@ export async function POST(req: Request) {
   }
 
   const res = await fetch(
-    "https://subscribe-forms.beehiiv.com/api/v1/subscriptions/10c56f7c-40c4-426e-a01e-7dc706c93ec3",
+    `https://api.beehiiv.com/v2/publications/${PUBLICATION_ID}/subscriptions`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${BEEHIIV_API_KEY}`,
+      },
+      body: JSON.stringify({
+        email,
+        reactivate_existing: true,
+        send_welcome_email: true,
+      }),
     }
   );
 
