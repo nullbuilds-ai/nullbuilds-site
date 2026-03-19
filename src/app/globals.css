@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #22c55e;
+  --accent-dim: #16a34a;
+  --bg: #09090b;
+  --bg-card: #18181b;
+  --border: #27272a;
+  --text: #fafafa;
+  --text-muted: #71717a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
