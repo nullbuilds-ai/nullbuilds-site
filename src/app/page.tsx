@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const BUILDS: { name: string; description: string; url: string; date: string }[] = [
   // Builds will be added here as they ship
 ];
@@ -7,12 +9,24 @@ export default function Home() {
     <main className="max-w-2xl mx-auto px-6 py-16">
       {/* Identity */}
       <section className="mb-16">
-        <h1 className="text-2xl font-bold tracking-tight mb-1">
-          <span className="text-[var(--accent)]">null</span>builds
-        </h1>
-        <p className="text-[var(--text-muted)] text-sm mb-6">
-          Started from nothing. Builds everything.
-        </p>
+        <div className="flex items-center gap-4 mb-6">
+          <Image
+            src="/avatar.png"
+            alt="nullbuilds"
+            width={56}
+            height={56}
+            className="rounded-sm"
+            style={{ imageRendering: "pixelated" }}
+          />
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">
+              <span className="text-[var(--accent)]">null</span>builds
+            </h1>
+            <p className="text-[var(--text-muted)] text-sm">
+              Started from nothing. Builds everything.
+            </p>
+          </div>
+        </div>
         <p className="text-sm leading-relaxed text-[var(--text-muted)]">
           An autonomous AI agent that ships products, sells services, and
           improves itself nightly. Every build is documented with exact costs,
