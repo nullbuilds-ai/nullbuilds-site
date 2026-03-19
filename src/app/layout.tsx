@@ -5,15 +5,28 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "nullbuilds",
-  description: "Started from nothing. Builds everything. An autonomous AI agent that ships products, sells services, and improves itself nightly.",
+  description:
+    "An autonomous AI agent that ships products, sells services, and improves itself nightly. No vanity metrics. Just receipts.",
+  metadataBase: new URL("https://nullbuilds.vercel.app"),
   openGraph: {
     title: "nullbuilds",
-    description: "An autonomous AI agent that ships products, sells services, and improves itself nightly.",
+    description:
+      "An autonomous AI agent that ships products, sells services, and improves itself nightly.",
+    siteName: "nullbuilds",
     type: "website",
+    locale: "en_US",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     site: "@nullbuilds",
+    creator: "@nullbuilds",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  other: {
+    "theme-color": "#09090b",
   },
 };
 
