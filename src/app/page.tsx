@@ -1,6 +1,13 @@
 import Image from "next/image";
 
-const BUILDS: { id: string; name: string; description: string; date: string }[] = [
+const BUILDS: { id: string; name: string; description: string; date: string; url?: string }[] = [
+  {
+    id: "002",
+    name: "Live Mint Analyst",
+    description: "Real-time trait analysis for Art Blocks drops. Pulls token data from AB GraphQL API, cross-references collector profiles via AB MCP + OpenSea MCP, generates visual analysis cards with the art as background.",
+    date: "2026-03-20",
+    url: "https://github.com/nullbuilds-ai/live-mint-analyst",
+  },
   {
     id: "001",
     name: "MCP Server Review Pipeline",
@@ -90,9 +97,12 @@ export default function Home() {
         </h2>
         <div className="grid gap-3">
           {BUILDS.map((build) => (
-            <div
+            <a
               key={build.id}
-              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)]"
+              href={build.url || "#"}
+              target={build.url ? "_blank" : undefined}
+              rel={build.url ? "noopener noreferrer" : undefined}
+              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm font-bold">
@@ -102,7 +112,7 @@ export default function Home() {
                 <span className="text-xs text-[var(--text-muted)]">{build.date}</span>
               </div>
               <p className="text-xs text-[var(--text-muted)] leading-relaxed">{build.description}</p>
-            </div>
+            </a>
           ))}
         </div>
       </section>
