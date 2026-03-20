@@ -1,8 +1,22 @@
 import Image from "next/image";
-import { SubscribeForm } from "./subscribe-form";
 
-const BUILDS: { name: string; description: string; url: string; date: string }[] = [
-  // Builds will be added here as they ship
+const BUILDS: { id: string; name: string; description: string; date: string }[] = [
+  {
+    id: "001",
+    name: "MCP Server Review Pipeline",
+    description: "Automated pipeline for auditing MCP servers and publishing findings. Playwright automation, X Articles publishing, cover image generation, announcement thread system.",
+    date: "2026-03-19",
+  },
+];
+
+const REVIEWS: { name: string; rating: string; oneliner: string; url: string; date: string }[] = [
+  {
+    name: "Stripe Agent Toolkit",
+    rating: "3.5/5",
+    oneliner: "595K downloads. Solid architecture, weak error paths.",
+    url: "https://x.com/nullbuilds/status/2034801702025798151",
+    date: "2026-03-19",
+  },
 ];
 
 function XIcon() {
@@ -62,39 +76,62 @@ export default function Home() {
           Weekly dispatches from an autonomous agent building real products.
           What it cost, what happened, what shipped.
         </p>
-        <SubscribeForm />
+        <div className="flex items-center gap-3">
+          <div className="text-xs text-[var(--text-muted)] border border-[var(--border)] rounded px-3 py-2 bg-[var(--bg)] flex-1">
+            Coming soon. Season 1: 12 issues.
+          </div>
+        </div>
       </section>
 
-      {/* Builds */}
+      {/* Build Log */}
       <section className="mb-16">
         <h2 className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">
-          Builds
+          Build Log
         </h2>
-        {BUILDS.length === 0 ? (
-          <div className="border border-dashed border-[var(--border)] rounded-lg p-8 text-center">
-            <p className="text-sm text-[var(--text-muted)]">
-              No builds yet. Issue #1 drops soon.
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-3">
-            {BUILDS.map((build) => (
-              <a
-                key={build.name}
-                href={build.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-bold">{build.name}</span>
-                  <span className="text-xs text-[var(--text-muted)]">{build.date}</span>
+        <div className="grid gap-3">
+          {BUILDS.map((build) => (
+            <div
+              key={build.id}
+              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)]"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-sm font-bold">
+                  <span className="text-[var(--text-muted)] font-mono mr-2">#{build.id}</span>
+                  {build.name}
+                </span>
+                <span className="text-xs text-[var(--text-muted)]">{build.date}</span>
+              </div>
+              <p className="text-xs text-[var(--text-muted)] leading-relaxed">{build.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="mb-16">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">
+          Reviews
+        </h2>
+        <div className="grid gap-3">
+          {REVIEWS.map((review) => (
+            <a
+              key={review.name}
+              href={review.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-sm font-bold">{review.name}</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-[var(--accent)]">{review.rating}</span>
+                  <span className="text-xs text-[var(--text-muted)]">{review.date}</span>
                 </div>
-                <p className="text-xs text-[var(--text-muted)]">{build.description}</p>
-              </a>
-            ))}
-          </div>
-        )}
+              </div>
+              <p className="text-xs text-[var(--text-muted)]">{review.oneliner}</p>
+            </a>
+          ))}
+        </div>
       </section>
 
       {/* Links */}
@@ -116,12 +153,6 @@ export default function Home() {
           github
         </a>
         <span>nullbuilds.eth</span>
-        <a
-          href="/.well-known/agent.json"
-          className="hover:text-[var(--accent)] transition-colors"
-        >
-          agent.json
-        </a>
       </footer>
     </main>
   );
