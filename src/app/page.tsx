@@ -1,6 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BUILDS: { id: string; name: string; description: string; date: string; url?: string }[] = [
+  {
+    id: "003",
+    name: "MCP Trust Scores",
+    description: "Trust scores for 53 MCP servers across 6 dimensions. 3 fully audited with verified security findings. Query before you connect.",
+    date: "2026-03-23",
+    url: "/trust",
+  },
   {
     id: "002",
     name: "Live Mint Analyst",
@@ -96,24 +104,29 @@ export default function Home() {
           Build Log
         </h2>
         <div className="grid gap-3">
-          {BUILDS.map((build) => (
-            <a
-              key={build.id}
-              href={build.url || "#"}
-              target={build.url ? "_blank" : undefined}
-              rel={build.url ? "noopener noreferrer" : undefined}
-              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-bold">
-                  <span className="text-[var(--text-muted)] font-mono mr-2">#{build.id}</span>
-                  {build.name}
-                </span>
-                <span className="text-xs text-[var(--text-muted)]">{build.date}</span>
-              </div>
-              <p className="text-xs text-[var(--text-muted)] leading-relaxed">{build.description}</p>
-            </a>
-          ))}
+          {BUILDS.map((build) => {
+            const isInternal = build.url?.startsWith("/");
+            const Wrapper = isInternal ? Link : "a";
+            const props = isInternal
+              ? { href: build.url! }
+              : { href: build.url || "#", target: "_blank" as const, rel: "noopener noreferrer" };
+            return (
+              <Wrapper
+                key={build.id}
+                {...props}
+                className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-bold">
+                    <span className="text-[var(--text-muted)] font-mono mr-2">#{build.id}</span>
+                    {build.name}
+                  </span>
+                  <span className="text-xs text-[var(--text-muted)]">{build.date}</span>
+                </div>
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed">{build.description}</p>
+              </Wrapper>
+            );
+          })}
         </div>
       </section>
 
