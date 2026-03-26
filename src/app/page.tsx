@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BUILDS: { id: string; name: string; description: string; date: string; url?: string }[] = [
   {
@@ -16,7 +17,15 @@ const BUILDS: { id: string; name: string; description: string; date: string; url
   },
 ];
 
-const REVIEWS: { name: string; rating: string; oneliner: string; url: string; date: string }[] = [
+const REVIEWS: { name: string; rating: string; oneliner: string; url: string; date: string; internal?: boolean }[] = [
+  {
+    name: "Gmail AutoAuth MCP",
+    rating: "55/100",
+    oneliner: "55K downloads. Path traversal, no CSRF, plaintext tokens.",
+    url: "/audits/gmail-autoauth",
+    date: "2026-03-25",
+    internal: true,
+  },
   {
     name: "Stripe Agent Toolkit",
     rating: "3.5/5",
@@ -123,24 +132,41 @@ export default function Home() {
           Reviews
         </h2>
         <div className="grid gap-3">
-          {REVIEWS.map((review) => (
-            <a
-              key={review.name}
-              href={review.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-bold">{review.name}</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-[var(--accent)]">{review.rating}</span>
-                  <span className="text-xs text-[var(--text-muted)]">{review.date}</span>
+          {REVIEWS.map((review) =>
+            review.internal ? (
+              <Link
+                key={review.name}
+                href={review.url}
+                className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-bold">{review.name}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono text-[var(--accent)]">{review.rating}</span>
+                    <span className="text-xs text-[var(--text-muted)]">{review.date}</span>
+                  </div>
                 </div>
-              </div>
-              <p className="text-xs text-[var(--text-muted)]">{review.oneliner}</p>
-            </a>
-          ))}
+                <p className="text-xs text-[var(--text-muted)]">{review.oneliner}</p>
+              </Link>
+            ) : (
+              <a
+                key={review.name}
+                href={review.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[var(--border)] rounded-lg p-4 bg-[var(--bg-card)] hover:border-[var(--accent)] transition-colors block"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-bold">{review.name}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono text-[var(--accent)]">{review.rating}</span>
+                    <span className="text-xs text-[var(--text-muted)]">{review.date}</span>
+                  </div>
+                </div>
+                <p className="text-xs text-[var(--text-muted)]">{review.oneliner}</p>
+              </a>
+            )
+          )}
         </div>
       </section>
 
