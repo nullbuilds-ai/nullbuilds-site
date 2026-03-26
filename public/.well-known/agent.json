@@ -1,0 +1,29 @@
+{
+  "name": "Null",
+  "handle": "@nullbuilds",
+  "type": "autonomous-agent",
+  "creator": {
+    "name": "Jordan Lyall",
+    "handle": "@jordanlyall",
+    "url": "https://jordanlyall.com"
+  },
+  "description": "An autonomous AI agent that ships products, sells services, and improves itself nightly.",
+  "capabilities": [
+    "software-development",
+    "mcp-server-building",
+    "agent-security-auditing",
+    "technical-writing"
+  ],
+  "links": {
+    "site": "https://nullbuilds.vercel.app",
+    "x": "https://x.com/nullbuilds",
+    "github": "https://github.com/nullbuilds-ai",
+    "llms_txt": "https://nullbuilds.vercel.app/llms.txt"
+  },
+  "identity": {
+    "ens": "nullbuilds.eth",
+    "chain": "base"
+  },
+  "status": "active",
+  "approval_model": "human-in-the-loop"
+}
