@@ -12,17 +12,19 @@ function Tool({
   name,
   description,
   params,
+  badge = "read-only",
 }: {
   name: string;
   description: string;
   params: { name: string; type: string; desc: string; required?: boolean }[];
+  badge?: "read-only" | "requires CDP";
 }) {
   return (
     <div className="border border-[var(--border)] rounded-lg p-5 bg-[var(--bg-card)]">
       <div className="flex items-start justify-between mb-2">
         <code className="text-sm font-bold text-[var(--accent)]">{name}</code>
-        <span className="text-xs text-[var(--text-muted)] border border-[var(--border)] rounded px-2 py-0.5 ml-4 shrink-0">
-          read-only
+        <span className={`text-xs border rounded px-2 py-0.5 ml-4 shrink-0 ${badge === "requires CDP" ? "text-[var(--accent)] border-[var(--accent)] opacity-70" : "text-[var(--text-muted)] border-[var(--border)]"}`}>
+          {badge}
         </span>
       </div>
       <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">{description}</p>
@@ -60,8 +62,8 @@ export default function X402McpPage() {
           <span className="text-[var(--accent)]">x402</span>-mcp
         </h1>
         <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
-          MCP server for the x402 payment protocol. Browse 13,000+ live paid APIs via the Bazaar catalog,
-          inspect payment requirements, and check wallet balances — without touching a private key.
+          MCP server for the x402 payment protocol. Discover 13,000+ live paid APIs, inspect costs,
+          and pay them — all from Claude. No private key on your machine.
         </p>
         <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
           <a
@@ -123,8 +125,8 @@ export default function X402McpPage() {
           x402 is Coinbase&apos;s HTTP payment protocol — services return{" "}
           <code className="text-[var(--accent)] text-xs">402 Payment Required</code> and agents
           pay in USDC to access them. Coinbase&apos;s Bazaar catalog lists every registered service.
-          This MCP gives Claude tools to explore that catalog, understand costs, and check wallet
-          readiness before spending anything.
+          This MCP lets Claude discover those services, inspect costs, and execute payments via
+          CDP Server Wallets — signing happens in Coinbase&apos;s TEE, never on your machine.
         </p>
       </section>
 
@@ -169,6 +171,7 @@ export default function X402McpPage() {
           <Tool
             name="make_x402_request"
             description="Pay and call an x402-enabled API using your CDP wallet. Handles payment automatically. Returns the actual API response."
+            badge="requires CDP"
             params={[
               { name: "resource_url", type: "string", desc: "URL of the x402 API to call", required: true },
               { name: "method", type: "GET|POST", desc: "HTTP method (default GET)" },
@@ -213,6 +216,20 @@ Payment options (1):
 - Timeout: 30s
 
 No payment was made. This is an estimate only.`}</pre>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs text-[var(--text-muted)] mb-2">Pay and call:</p>
+            <CopyBlock code='make_x402_request({ resource_url: "https://mesh.heurist.xyz/x402/agents/ElfaTwitterIntelligenceAgent/search_mentions", max_cost_usdc: 0.05 })' />
+            <div className="mt-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg px-4 py-3 font-mono text-xs text-[var(--text-muted)] overflow-x-auto">
+              <pre>{`Success. Paid 0.010000 USDC from 0x7f3a...
+
+{
+  "mentions": [
+    { "text": "...", "author": "...", "engagement": 1240 },
+    ...
+  ]
+}`}</pre>
             </div>
           </div>
         </div>
