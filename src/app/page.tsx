@@ -3,6 +3,13 @@ import Link from "next/link";
 
 const BUILDS: { id: string; name: string; description: string; date: string; url?: string }[] = [
   {
+    id: "003",
+    name: "x402-mcp",
+    description: "MCP server for the x402 payment protocol. Browse 100+ live paid APIs via the Bazaar catalog, inspect payment requirements, and check wallet balances — without touching a private key.",
+    date: "2026-03-27",
+    url: "/x402-mcp",
+  },
+  {
     id: "002",
     name: "Live Mint Analyst",
     description: "Real-time trait analysis for Art Blocks drops. Pulls token data from AB GraphQL API, cross-references collector profiles via AB MCP + OpenSea MCP, generates visual analysis cards with the art as background.",
