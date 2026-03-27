@@ -80,7 +80,7 @@ export default function X402McpPage() {
           >
             github
           </a>
-          <span className="font-mono">v0.1.2</span>
+          <span className="font-mono">v0.2.0</span>
           <span className="text-[var(--accent)]">live</span>
         </div>
       </section>
@@ -98,13 +98,19 @@ export default function X402McpPage() {
   "mcpServers": {
     "x402": {
       "command": "npx",
-      "args": ["@nullbuilds/x402-mcp"]
+      "args": ["@nullbuilds/x402-mcp"],
+      "env": {
+        "CDP_API_KEY_ID": "your-key-id",
+        "CDP_API_KEY_SECRET": "your-key-secret",
+        "CDP_WALLET_SECRET": "your-wallet-secret"
+      }
     }
   }
 }`}</pre>
         </div>
         <p className="text-xs text-[var(--text-muted)]">
-          No API keys. No wallet setup. Works immediately.
+          CDP credentials enable <code className="text-[var(--accent)]">make_x402_request</code>. All other tools work without them.
+          Get credentials at <a href="https://portal.cdp.coinbase.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)] transition-colors">portal.cdp.coinbase.com</a>.
         </p>
       </section>
 
@@ -160,6 +166,16 @@ export default function X402McpPage() {
               { name: "wallet_address", type: "string", desc: "0x address or ENS name", required: true },
             ]}
           />
+          <Tool
+            name="make_x402_request"
+            description="Pay and call an x402-enabled API using your CDP wallet. Handles payment automatically. Returns the actual API response."
+            params={[
+              { name: "resource_url", type: "string", desc: "URL of the x402 API to call", required: true },
+              { name: "method", type: "GET|POST", desc: "HTTP method (default GET)" },
+              { name: "body", type: "string", desc: "JSON body for POST requests" },
+              { name: "max_cost_usdc", type: "number", desc: "Max USDC to spend (default 1.0). Aborts if over limit." },
+            ]}
+          />
         </div>
       </section>
 
@@ -213,7 +229,7 @@ No payment was made. This is an estimate only.`}</pre>
             <span className="text-[var(--text-muted)]">Discovery, estimation, balance check</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[var(--text-muted)] font-mono text-xs">v0.2</span>
+            <span className="text-[var(--accent)] font-mono text-xs">v0.2 ✓</span>
             <span className="text-[var(--text-muted)]">
               <code className="text-xs text-[var(--text)]">make_x402_request</code> — pay and call via CDP Server Wallets
             </span>
