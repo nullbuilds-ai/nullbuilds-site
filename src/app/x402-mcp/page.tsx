@@ -60,7 +60,7 @@ export default function X402McpPage() {
           <span className="text-[var(--accent)]">x402</span>-mcp
         </h1>
         <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
-          MCP server for the x402 payment protocol. Browse 100+ live paid APIs via the Bazaar catalog,
+          MCP server for the x402 payment protocol. Browse 13,000+ live paid APIs via the Bazaar catalog,
           inspect payment requirements, and check wallet balances — without touching a private key.
         </p>
         <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
@@ -168,18 +168,36 @@ export default function X402McpPage() {
         <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">
           Example
         </h2>
-        <div className="border border-[var(--border)] rounded-lg p-5 bg-[var(--bg-card)] space-y-4">
+        <div className="border border-[var(--border)] rounded-lg p-5 bg-[var(--bg-card)] space-y-6">
           <div>
             <p className="text-xs text-[var(--text-muted)] mb-2">Find Twitter intelligence services:</p>
-            <CopyBlock code='discover_paid_services({ query: "twitter" })' />
+            <CopyBlock code='discover_paid_services({ query: "twitter", network: "base" })' />
+            <div className="mt-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg px-4 py-3 font-mono text-xs text-[var(--text-muted)] overflow-x-auto">
+              <pre>{`Found 3 service(s):
+
+- mesh.heurist.xyz (Base, 0.01 USDC)
+  URL: https://mesh.heurist.xyz/x402/agents/ElfaTwitterIntelligenceAgent/search_mentions
+  Search for mentions of specific tokens or topics on Twitter.
+
+- mesh.heurist.xyz (Base, 0.05 USDC)
+  URL: https://mesh.heurist.xyz/x402/agents/ElfaTwitterIntelligenceAgent/get_smart_mentions
+  Get smart mentions with engagement metrics and sentiment analysis.`}</pre>
+            </div>
           </div>
           <div>
-            <p className="text-xs text-[var(--text-muted)] mb-2">Check what a service costs before paying:</p>
+            <p className="text-xs text-[var(--text-muted)] mb-2">Check what it costs before paying:</p>
             <CopyBlock code='estimate_payment({ resource_url: "https://mesh.heurist.xyz/x402/agents/ElfaTwitterIntelligenceAgent/search_mentions" })' />
-          </div>
-          <div>
-            <p className="text-xs text-[var(--text-muted)] mb-2">Verify wallet has enough USDC:</p>
-            <CopyBlock code='check_wallet_balance({ wallet_address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" })' />
+            <div className="mt-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg px-4 py-3 font-mono text-xs text-[var(--text-muted)] overflow-x-auto">
+              <pre>{`Payment estimate for: https://mesh.heurist.xyz/...
+Payment options (1):
+
+### Option 1
+- Cost: 0.01 USDC on Base
+- Recipient: 0x3b5...
+- Timeout: 30s
+
+No payment was made. This is an estimate only.`}</pre>
+            </div>
           </div>
         </div>
       </section>
